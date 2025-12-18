@@ -236,18 +236,42 @@ if st.button("🔮 Predict Delay", type="primary"):
                 if not preds:
                     st.warning("⚠️ No predictions returned from API.")
                 else:
-                    pred = int(preds[0])
-                    label = "DELAYED" if pred == 1 else "ON TIME"
+                    pred0 = preds[0]
+
+                    # 1) 先抽概率（优先用 pred0 里带的；否则用 API 单独返回的 probabilities）
+                    prob_delayed = _extract_prob(pred0)
+                    if prob_delayed is None and isinstance(probs, list) and len(probs) > 0:
+                        prob_delayed = _coerce_float(probs[0], None)  # type: ignore
+
+                    # 2) 再抽 label（如果 API 给了字符串 label 就直接用）
+                    label_raw = _extract_label(pred0).strip().lower()
+
+                    # 3) 决策：优先用概率（因为你已经看到概率在变），否则用 label/raw 数字
+                    if prob_delayed is not None:
+                        pred_class = 1 if float(prob_delayed) >= 0.5 else 0
+                    else:
+                        # label_raw 可能是 "delayed"/"ontime"/"on time"/"0"/"1"
+                        if label_raw in ("delayed", "delay", "1"):
+                            pred_class = 1
+                        elif label_raw in ("ontime", "on time", "on_time", "0"):
+                            pred_class = 0
+                        else:
+                            # 最后兜底：如果 pred0 是数字
+                            pred_class = int(pred0) if isinstance(pred0, (int, float)) else 0
+
+                    pred_label = "DELAYED" if pred_class == 1 else "ON TIME"
+
                     st.success("✅ Prediction successful!")
-
                     st.subheader("Prediction Result")
-                    st.metric("Predicted Class", label)
+                    st.metric("Predicted Class", pred_label)
 
-                    if probs and len(probs) > 0:
-                        st.metric("Probability of Delay (P=1)", f"{float(probs[0]):.3f}")
+                    if prob_delayed is not None:
+                        st.metric("Probability of Delay (P=1)", f"{float(prob_delayed):.3f}")
 
                     with st.expander("📋 View Input Summary"):
                         st.json(user_input)
+
+
 
 
 st.markdown("---")
