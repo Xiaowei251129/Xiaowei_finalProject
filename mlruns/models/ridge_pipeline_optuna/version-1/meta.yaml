@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766022000473
+current_stage: None
+description: null
+last_updated_timestamp: 1766022000473
+name: ridge_pipeline_optuna
+run_id: 71d0f89d3eaa4d1680ee0128f43bab1b
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/71d0f89d3eaa4d1680ee0128f43bab1b/artifacts/flightdelays_model
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/71d0f89d3eaa4d1680ee0128f43bab1b/artifacts/flightdelays_model
+user_id: null
+version: 1

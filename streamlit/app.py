@@ -114,86 +114,102 @@ st.title("✈️ Flight Delay Classification App")
 st.write(f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** for prediction.")
 
 st.header("Input Features")
-
 user_input: Dict[str, Any] = {}
 
-# -----------------------------------------------------------------------------
-# Numerical Features
-# -----------------------------------------------------------------------------
+# -----------------------
+# Numerical (int) features
+# -----------------------
 st.subheader("Numerical Features")
 
-# 对你的列做一个“更合理”的输入控件类型设置
-# schedtime 常见是 0-2359；dayweek 1-7；daymonth 1-31；flightnumber 通常整数
-INT_LIKE = {"schedtime", "dayweek", "daymonth", "flightnumber"}
-# distance/weather 可能是连续或半连续
-SLIDER_FEATURES = {"schedtime", "distance", "weather", "dayweek", "daymonth", "flightnumber"}
+def int_slider(name, min_v, max_v, default_v, help_text=""):
+    return st.slider(
+        name.replace("_", " ").title(),
+        min_value=int(min_v),
+        max_value=int(max_v),
+        value=int(default_v),
+        step=1,
+        help=help_text,
+        key=name,
+    )
 
-for feature_name, stats in numerical_features.items():
-    min_val = _coerce_float(stats.get("min", 0.0))
-    max_val = _coerce_float(stats.get("max", 100.0))
-    mean_val = _coerce_float(stats.get("mean", (min_val + max_val) / 2))
-    median_val = _coerce_float(stats.get("median", mean_val))
-    default_val = median_val
+def int_select(name, options, default_v=None, help_text=""):
+    label = name.replace("_", " ").title()
+    if default_v is None:
+        default_v = options[0]
+    default_idx = options.index(default_v) if default_v in options else 0
+    return st.selectbox(label, options=options, index=default_idx, help=help_text, key=name)
 
-    label = _pretty_label(feature_name)
-    help_text = f"Min: {min_val:.2f}, Max: {max_val:.2f}, Mean: {mean_val:.2f}, Median: {median_val:.2f}"
+# 1) schedtime: 强制 0~2359
+sched_stats = numerical_features.get("schedtime", {"min": 0, "max": 2359, "median": 1200})
+user_input["schedtime"] = int_slider(
+    "schedtime",
+    0, 2359,
+    sched_stats.get("median", 1200),
+    help_text="Scheduled departure time in HHMM (0~2359)."
+)
 
-    if feature_name in SLIDER_FEATURES:
-        step = 1.0 if feature_name in INT_LIKE else (_guess_step(min_val, max_val) / 10.0)
+# 2) distance: int slider（范围来自 schema）
+dist_stats = numerical_features.get("distance", {"min": 0, "max": 3000, "median": 500})
+user_input["distance"] = int_slider(
+    "distance",
+    dist_stats.get("min", 0),
+    dist_stats.get("max", 3000),
+    dist_stats.get("median", 500),
+    help_text=f"Min/Max from data: {dist_stats.get('min')}~{dist_stats.get('max')}"
+)
 
-        val = st.slider(
-            label,
-            min_value=float(min_val),
-            max_value=float(max_val),
-            value=float(default_val),
-            step=float(step),
-            help=help_text,
-            key=feature_name,
-        )
-        # 对“看起来应该是整数”的列强转为 int，避免API侧类型不一致
-        user_input[feature_name] = int(round(val)) if feature_name in INT_LIKE else float(val)
-    else:
-        step = 1.0 if feature_name in INT_LIKE else _guess_step(min_val, max_val)
-        val = st.number_input(
-            label,
-            min_value=float(min_val),
-            max_value=float(max_val),
-            value=float(default_val),
-            step=float(step),
-            help=help_text,
-            key=feature_name,
-        )
-        user_input[feature_name] = int(round(val)) if feature_name in INT_LIKE else float(val)
+# 3) dayweek: 1~7
+user_input["dayweek"] = int_select("dayweek", list(range(1, 8)), default_v=1)
 
-# -----------------------------------------------------------------------------
-# Categorical Features
-# -----------------------------------------------------------------------------
+# 4) daymonth: 1~31
+user_input["daymonth"] = int_select("daymonth", list(range(1, 32)), default_v=15)
+
+# 5) flightnumber: int input（有些范围很大，用 number_input 更合适）
+fn_stats = numerical_features.get("flightnumber", {"min": 1, "max": 9999, "median": 1000})
+user_input["flightnumber"] = st.number_input(
+    "Flightnumber",
+    min_value=int(fn_stats.get("min", 1)),
+    max_value=int(fn_stats.get("max", 9999)),
+    value=int(fn_stats.get("median", 1000)),
+    step=1,
+    help="Flight number (integer).",
+    key="flightnumber",
+)
+
+# -----------------------
+# Categorical features
+# -----------------------
 st.subheader("Categorical Features")
 
-for feature_name, info in categorical_features.items():
-    unique_values: List[str] = info.get("unique_values", [])
-    value_counts: Dict[str, int] = info.get("value_counts", {})
+# weather: 0/1 下拉框
+weather_info = categorical_features.get("weather", {})
+weather_options = weather_info.get("unique_values", [0, 1])
+# 兼容 JSON 里可能存成字符串
+weather_options = [int(x) for x in weather_options]
+
+weather_label_map = {0: "0 (No weather delay)", 1: "1 (Weather delay)"}
+weather_display = [weather_label_map.get(x, str(x)) for x in weather_options]
+weather_choice = st.selectbox("Weather", options=weather_display, index=0, key="weather")
+user_input["weather"] = 0 if weather_choice.startswith("0") else 1
+
+# carrier/origin/dest：正常 selectbox
+for feature_name in ["carrier", "origin", "dest"]:
+    info = categorical_features.get(feature_name, {})
+    unique_values = info.get("unique_values", [])
+    value_counts = info.get("value_counts", {})
 
     if not unique_values:
+        st.warning(f"Missing schema for {feature_name}.")
         continue
 
-    # 默认选最常见的值（更接近“真实输入分布”）
-    if value_counts:
-        default_value = max(value_counts, key=value_counts.get)
-    else:
-        default_value = unique_values[0]
-
-    try:
-        default_idx = unique_values.index(default_value)
-    except ValueError:
-        default_idx = 0
+    default_value = max(value_counts, key=value_counts.get) if value_counts else unique_values[0]
+    default_idx = unique_values.index(default_value) if default_value in unique_values else 0
 
     user_input[feature_name] = st.selectbox(
-        _pretty_label(feature_name),
+        feature_name.title(),
         options=unique_values,
         index=default_idx,
         key=feature_name,
-        help=f"Distribution: {value_counts}",
     )
 
 st.markdown("---")
@@ -215,33 +231,24 @@ if st.button("🔮 Predict Delay", type="primary"):
             else:
                 data = resp.json()
                 preds = data.get("predictions", [])
+                probs = data.get("probabilities", None)  # 如果你的 API 有返回概率
 
                 if not preds:
                     st.warning("⚠️ No predictions returned from API.")
                 else:
-                    pred0 = preds[0]
-                    label = _extract_label(pred0)
-                    prob_delayed = _extract_prob(pred0)
-
+                    pred = int(preds[0])
+                    label = "DELAYED" if pred == 1 else "ON TIME"
                     st.success("✅ Prediction successful!")
+
                     st.subheader("Prediction Result")
+                    st.metric("Predicted Class", label)
 
-                    # 展示类别
-                    label_norm = label.lower().strip()
-                    if label_norm in {"1", "delayed", "delay", "true", "yes"}:
-                        st.metric("Predicted Class", "DELAYED")
-                    elif label_norm in {"0", "ontime", "on time", "no"}:
-                        st.metric("Predicted Class", "ON TIME")
-                    else:
-                        st.metric("Predicted Class", label)
+                    if probs and len(probs) > 0:
+                        st.metric("Probability of Delay (P=1)", f"{float(probs[0]):.3f}")
 
-                    # 展示概率（如果API返回）
-                    if prob_delayed is not None:
-                        st.metric("Probability of Delay (P=1)", f"{prob_delayed:.3f}")
-
-                    # 展示输入
                     with st.expander("📋 View Input Summary"):
                         st.json(user_input)
+
 
 st.markdown("---")
 st.caption(

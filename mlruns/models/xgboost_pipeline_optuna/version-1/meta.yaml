@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766022009111
+current_stage: None
+description: null
+last_updated_timestamp: 1766022009111
+name: xgboost_pipeline_optuna
+run_id: 66f8978284924a6daa8636c78d7f4c81
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/66f8978284924a6daa8636c78d7f4c81/artifacts/flightdelays_model
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/66f8978284924a6daa8636c78d7f4c81/artifacts/flightdelays_model
+user_id: null
+version: 1

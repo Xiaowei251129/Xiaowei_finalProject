@@ -29,13 +29,13 @@ from lightgbm import LGBMClassifier
 NUM_FEATURES: List[str] = [
     "schedtime",
     "distance",
-    "weather",
     "dayweek",
     "daymonth",
     "flightnumber",
 ]
 
 CAT_FEATURES: List[str] = [
+    "weather",
     "carrier",
     "origin",
     "dest",

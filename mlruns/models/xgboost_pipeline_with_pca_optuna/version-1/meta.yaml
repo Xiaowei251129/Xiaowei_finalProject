@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766022092243
+current_stage: None
+description: null
+last_updated_timestamp: 1766022092243
+name: xgboost_pipeline_with_pca_optuna
+run_id: 197b7dce8d6a4c38ad0f215162c063ea
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/197b7dce8d6a4c38ad0f215162c063ea/artifacts/flightdelays_model_with_pca
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/197b7dce8d6a4c38ad0f215162c063ea/artifacts/flightdelays_model_with_pca
+user_id: null
+version: 1

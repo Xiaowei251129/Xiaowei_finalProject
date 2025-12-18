@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766022083339
+current_stage: None
+description: null
+last_updated_timestamp: 1766022083339
+name: ridge_pipeline_with_pca_optuna
+run_id: 06935c8364b5483f94b0c1b15c98333e
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/06935c8364b5483f94b0c1b15c98333e/artifacts/flightdelays_model_with_pca
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/06935c8364b5483f94b0c1b15c98333e/artifacts/flightdelays_model_with_pca
+user_id: null
+version: 1

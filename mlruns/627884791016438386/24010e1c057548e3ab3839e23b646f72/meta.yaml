@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/24010e1c057548e3ab3839e23b646f72/artifacts
+end_time: 1766022004732
+entry_point_name: ''
+experiment_id: '627884791016438386'
+lifecycle_stage: active
+run_id: 24010e1c057548e3ab3839e23b646f72
+run_name: histgradientboosting_baseline_optuna
+run_uuid: 24010e1c057548e3ab3839e23b646f72
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766022002273
+status: 3
+tags: []
+user_id: chengxiaowei

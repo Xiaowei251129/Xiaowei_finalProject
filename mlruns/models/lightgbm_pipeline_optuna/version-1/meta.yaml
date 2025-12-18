@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766022080599
+current_stage: None
+description: null
+last_updated_timestamp: 1766022080599
+name: lightgbm_pipeline_optuna
+run_id: 2ef031a2ef68421785d9274d91b00fd6
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/2ef031a2ef68421785d9274d91b00fd6/artifacts/flightdelays_model
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/627884791016438386/2ef031a2ef68421785d9274d91b00fd6/artifacts/flightdelays_model
+user_id: null
+version: 1
