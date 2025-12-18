@@ -1,0 +1,38 @@
+artifact_path: flightdelays_model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+is_signature_from_type_hint: false
+mlflow_version: 2.22.4
+model_size_bytes: 2619437
+model_uuid: 4ab4c07a462f4a0281e8b29fe292a059
+prompts: null
+run_id: 63f5f1f9a112417ea5cb25afae75a7c4
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "long", "name": "schedtime", "required": true}, {"type": "long",
+    "name": "distance", "required": true}, {"type": "long", "name": "weather", "required":
+    true}, {"type": "long", "name": "dayweek", "required": true}, {"type": "long",
+    "name": "daymonth", "required": true}, {"type": "long", "name": "flightnumber",
+    "required": true}, {"type": "string", "name": "carrier", "required": true}, {"type":
+    "string", "name": "origin", "required": true}, {"type": "string", "name": "dest",
+    "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-12-18 16:38:40.971721'

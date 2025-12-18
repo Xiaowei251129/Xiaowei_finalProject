@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766075803313
+current_stage: None
+description: null
+last_updated_timestamp: 1766075803313
+name: xgboost_pipeline_with_pca
+run_id: d07831ec4226485ca0b9a5c2b66682e9
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/d07831ec4226485ca0b9a5c2b66682e9/artifacts/flightdelays_model_with_pca
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/d07831ec4226485ca0b9a5c2b66682e9/artifacts/flightdelays_model_with_pca
+user_id: null
+version: 1

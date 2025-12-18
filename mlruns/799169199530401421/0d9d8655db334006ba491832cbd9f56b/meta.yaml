@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/799169199530401421/0d9d8655db334006ba491832cbd9f56b/artifacts
+end_time: 1766075936856
+entry_point_name: ''
+experiment_id: '799169199530401421'
+lifecycle_stage: active
+run_id: 0d9d8655db334006ba491832cbd9f56b
+run_name: xgboost_with_pca_optuna
+run_uuid: 0d9d8655db334006ba491832cbd9f56b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075934664
+status: 3
+tags: []
+user_id: chengxiaowei

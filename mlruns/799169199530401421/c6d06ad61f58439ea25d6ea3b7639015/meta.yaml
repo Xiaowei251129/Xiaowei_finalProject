@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/799169199530401421/c6d06ad61f58439ea25d6ea3b7639015/artifacts
+end_time: 1766075927657
+entry_point_name: ''
+experiment_id: '799169199530401421'
+lifecycle_stage: active
+run_id: c6d06ad61f58439ea25d6ea3b7639015
+run_name: ridge_with_pca_optuna
+run_uuid: c6d06ad61f58439ea25d6ea3b7639015
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075925499
+status: 3
+tags: []
+user_id: chengxiaowei

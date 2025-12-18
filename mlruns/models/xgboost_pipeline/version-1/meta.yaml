@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766075781251
+current_stage: None
+description: null
+last_updated_timestamp: 1766075781251
+name: xgboost_pipeline
+run_id: 0728b916128f404c8e8b3958e3b6d9dd
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/0728b916128f404c8e8b3958e3b6d9dd/artifacts/flightdelays_model
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/0728b916128f404c8e8b3958e3b6d9dd/artifacts/flightdelays_model
+user_id: null
+version: 1

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/eac0b1c2dc95438d9c363bbdb4fcff37/artifacts
+end_time: 1766075774058
+entry_point_name: ''
+experiment_id: '150401701819794343'
+lifecycle_stage: active
+run_id: eac0b1c2dc95438d9c363bbdb4fcff37
+run_name: ridge_baseline
+run_uuid: eac0b1c2dc95438d9c363bbdb4fcff37
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075771676
+status: 3
+tags: []
+user_id: chengxiaowei

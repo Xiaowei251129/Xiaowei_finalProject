@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/799169199530401421/63f5f1f9a112417ea5cb25afae75a7c4/artifacts
+end_time: 1766075924788
+entry_point_name: ''
+experiment_id: '799169199530401421'
+lifecycle_stage: active
+run_id: 63f5f1f9a112417ea5cb25afae75a7c4
+run_name: lightgbm_baseline_optuna
+run_uuid: 63f5f1f9a112417ea5cb25afae75a7c4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075920928
+status: 3
+tags: []
+user_id: chengxiaowei

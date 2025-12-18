@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766075800658
+current_stage: None
+description: null
+last_updated_timestamp: 1766075800658
+name: histgradientboosting_pipeline_with_pca
+run_id: 455c1685a2d24eb4a977a4af39e51bd5
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/455c1685a2d24eb4a977a4af39e51bd5/artifacts/flightdelays_model_with_pca
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/455c1685a2d24eb4a977a4af39e51bd5/artifacts/flightdelays_model_with_pca
+user_id: null
+version: 1

@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766075794539
+current_stage: None
+description: null
+last_updated_timestamp: 1766075794539
+name: lightgbm_pipeline
+run_id: 480d9593a5484fdca3311f2e8e8be917
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/480d9593a5484fdca3311f2e8e8be917/artifacts/flightdelays_model
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/480d9593a5484fdca3311f2e8e8be917/artifacts/flightdelays_model
+user_id: null
+version: 1

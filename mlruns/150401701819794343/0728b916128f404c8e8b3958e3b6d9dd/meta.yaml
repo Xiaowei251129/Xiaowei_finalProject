@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/0728b916128f404c8e8b3958e3b6d9dd/artifacts
+end_time: 1766075781253
+entry_point_name: ''
+experiment_id: '150401701819794343'
+lifecycle_stage: active
+run_id: 0728b916128f404c8e8b3958e3b6d9dd
+run_name: xgboost_baseline
+run_uuid: 0728b916128f404c8e8b3958e3b6d9dd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075779075
+status: 3
+tags: []
+user_id: chengxiaowei

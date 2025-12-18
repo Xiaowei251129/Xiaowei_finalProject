@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766075815689
+current_stage: None
+description: null
+last_updated_timestamp: 1766075815689
+name: lightgbm_pipeline_with_pca
+run_id: 58c67740a98e4f228d2fd496e93926e4
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/58c67740a98e4f228d2fd496e93926e4/artifacts/flightdelays_model_with_pca
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/58c67740a98e4f228d2fd496e93926e4/artifacts/flightdelays_model_with_pca
+user_id: null
+version: 1

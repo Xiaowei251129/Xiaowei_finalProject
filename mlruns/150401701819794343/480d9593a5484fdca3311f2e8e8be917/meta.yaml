@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/480d9593a5484fdca3311f2e8e8be917/artifacts
+end_time: 1766075794542
+entry_point_name: ''
+experiment_id: '150401701819794343'
+lifecycle_stage: active
+run_id: 480d9593a5484fdca3311f2e8e8be917
+run_name: lightgbm_baseline
+run_uuid: 480d9593a5484fdca3311f2e8e8be917
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075790618
+status: 3
+tags: []
+user_id: chengxiaowei

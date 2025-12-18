@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/455c1685a2d24eb4a977a4af39e51bd5/artifacts
+end_time: 1766075800660
+entry_point_name: ''
+experiment_id: '150401701819794343'
+lifecycle_stage: active
+run_id: 455c1685a2d24eb4a977a4af39e51bd5
+run_name: histgradientboosting_with_pca
+run_uuid: 455c1685a2d24eb4a977a4af39e51bd5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075798138
+status: 3
+tags: []
+user_id: chengxiaowei

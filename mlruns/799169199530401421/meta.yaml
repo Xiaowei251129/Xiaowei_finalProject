@@ -1,0 +1,6 @@
+artifact_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/799169199530401421
+creation_time: 1766075833042
+experiment_id: '799169199530401421'
+last_update_time: 1766075833042
+lifecycle_stage: active
+name: flightdelays_multi_model_optuna

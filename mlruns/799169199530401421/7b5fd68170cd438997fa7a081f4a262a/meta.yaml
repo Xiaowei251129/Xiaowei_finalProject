@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/799169199530401421/7b5fd68170cd438997fa7a081f4a262a/artifacts
+end_time: 1766075849925
+entry_point_name: ''
+experiment_id: '799169199530401421'
+lifecycle_stage: active
+run_id: 7b5fd68170cd438997fa7a081f4a262a
+run_name: xgboost_baseline_optuna
+run_uuid: 7b5fd68170cd438997fa7a081f4a262a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766075847366
+status: 3
+tags: []
+user_id: chengxiaowei

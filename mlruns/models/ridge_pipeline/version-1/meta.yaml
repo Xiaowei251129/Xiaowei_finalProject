@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1766075774056
+current_stage: None
+description: null
+last_updated_timestamp: 1766075774056
+name: ridge_pipeline
+run_id: eac0b1c2dc95438d9c363bbdb4fcff37
+run_link: null
+source: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/eac0b1c2dc95438d9c363bbdb4fcff37/artifacts/flightdelays_model
+status: READY
+status_message: null
+storage_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/mlruns/150401701819794343/eac0b1c2dc95438d9c363bbdb4fcff37/artifacts/flightdelays_model
+user_id: null
+version: 1

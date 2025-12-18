@@ -1,6 +1,0 @@
-artifact_location: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/xiaowei_notebooks/mlruns/516981820070967512
-creation_time: 1765729494840
-experiment_id: '516981820070967512'
-last_update_time: 1765729494840
-lifecycle_stage: active
-name: flightdelays_classification_without_optuna
