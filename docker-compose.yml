@@ -4,7 +4,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
-    container_name: housing-api
+    container_name: finalproject-api
     # Use 'expose' instead of 'ports' to keep it internal only
     expose:
       - "8000"
@@ -14,30 +14,30 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     networks:
-      - housing-network
+      - finalproject-network
     restart: unless-stopped
 
   streamlit:
     build:
       context: ./streamlit
       dockerfile: Dockerfile
-    container_name: housing-streamlit
+    container_name: finalproject-streamlit
     # Only the Streamlit app is publicly accessible
     ports:
       - "8501:8501"
     volumes:
       # Mount data folder for future JSON schema loading
-      - ./data:/app/data:ro
+      - ./xiaowei_data:/app/xiaowei_data:ro
     environment:
       - API_URL=http://api:8000
       - PYTHONUNBUFFERED=1
     networks:
-      - housing-network
+      - finalproject-network
     depends_on:
       api:
         condition: service_healthy
     restart: unless-stopped
 
 networks:
-  housing-network:
+  finalproject-network:
     driver: bridge

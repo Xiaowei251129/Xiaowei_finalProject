@@ -1,0 +1,94 @@
+{
+  "numerical": {
+    "schedtime": {
+      "min": 600.0,
+      "max": 2130.0,
+      "mean": 1371.9386642435256,
+      "median": 1455.0
+    },
+    "deptime": {
+      "min": 10.0,
+      "max": 2330.0,
+      "mean": 1369.2989550204452,
+      "median": 1450.0
+    },
+    "distance": {
+      "min": 169.0,
+      "max": 229.0,
+      "mean": 211.87142208087232,
+      "median": 214.0
+    },
+    "weather": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.014538845979100408,
+      "median": 0.0
+    },
+    "dayweek": {
+      "min": 1.0,
+      "max": 7.0,
+      "mean": 3.9054975011358475,
+      "median": 4.0
+    },
+    "daymonth": {
+      "min": 1.0,
+      "max": 31.0,
+      "mean": 16.02498864152658,
+      "median": 16.0
+    },
+    "flightnumber": {
+      "min": 746.0,
+      "max": 7924.0,
+      "mean": 3815.086324398001,
+      "median": 2385.0
+    }
+  },
+  "categorical": {
+    "carrier": {
+      "unique_values": [
+        "CO",
+        "DH",
+        "DL",
+        "MQ",
+        "OH",
+        "RU",
+        "UA",
+        "US"
+      ],
+      "value_counts": {
+        "DH": 551,
+        "RU": 408,
+        "US": 404,
+        "DL": 388,
+        "MQ": 295,
+        "CO": 94,
+        "UA": 31,
+        "OH": 30
+      }
+    },
+    "origin": {
+      "unique_values": [
+        "BWI",
+        "DCA",
+        "IAD"
+      ],
+      "value_counts": {
+        "DCA": 1370,
+        "IAD": 686,
+        "BWI": 145
+      }
+    },
+    "dest": {
+      "unique_values": [
+        "EWR",
+        "JFK",
+        "LGA"
+      ],
+      "value_counts": {
+        "LGA": 1150,
+        "EWR": 665,
+        "JFK": 386
+      }
+    }
+  }
+}

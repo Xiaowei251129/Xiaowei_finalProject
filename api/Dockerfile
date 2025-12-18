@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 2. Copy FastAPI app and pipeline code
 COPY app.py .
-COPY housing_pipeline.py .
+COPY flightdelays_pipeline.py .
 
 # 3. Ensure models dir exists (will be mounted from host)
 RUN mkdir -p /app/models

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/chengxiaowei/Desktop/Python/eas503/Xiaowei_finalProject/xiaowei_notebooks/mlruns/516981820070967512/44c3dd7c6e144ab68d9b60ea60f17bd9/artifacts
+end_time: 1765729547655
+entry_point_name: ''
+experiment_id: '516981820070967512'
+lifecycle_stage: active
+run_id: 44c3dd7c6e144ab68d9b60ea60f17bd9
+run_name: xgb_pca=True
+run_uuid: 44c3dd7c6e144ab68d9b60ea60f17bd9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765729547044
+status: 3
+tags: []
+user_id: chengxiaowei

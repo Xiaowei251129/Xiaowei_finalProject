@@ -1,37 +1,43 @@
-# api/app.py
 """
-FastAPI service for housing price prediction.
+FastAPI service for flight delay classification.
 Loads the trained model and exposes a /predict endpoint.
 """
 
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Union
 
 import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-# Import shared pipeline components so unpickling works
-from housing_pipeline import (
-    ClusterSimilarity,
-    column_ratio,
-    ratio_name,
-    build_preprocessing,
-    make_estimator_for_name,
-)
+from flightdelays_pipeline import build_preprocessing, make_estimator_for_name
+
 
 # -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
-MODEL_PATH = Path("/app/models/global_best_model_optuna.pkl")
+# 你在 02/03 里保存的最终模型文件名（按你现在的命名）
+MODEL_PATH = Path("/app/models/global_best_flightdelays_optuna.pkl")
+
+# 你最终用于训练/预测的特征列（要和 Streamlit & 02/03 一致）
+REQUIRED_COLUMNS = [
+    "schedtime",
+    "distance",
+    "weather",
+    "dayweek",
+    "daymonth",
+    "flightnumber",
+    "carrier",
+    "origin",
+    "dest",
+]
 
 app = FastAPI(
-    title="Housing Price Prediction API",
-    description="FastAPI service for predicting California housing prices",
+    title="Flight Delay Classification API",
+    description="FastAPI service for predicting whether a flight is delayed (binary classification).",
     version="1.0.0",
 )
-
 
 # -----------------------------------------------------------------------------
 # Load model at startup
@@ -65,36 +71,50 @@ class PredictRequest(BaseModel):
     """
     Prediction request with list of instances (dicts of features).
     """
-    instances: List[Dict[str, Any]]
+    instances: List[Dict[str, Any]] = Field(..., description="List of feature dicts for prediction")
 
     class Config:
         schema_extra = {
             "example": {
                 "instances": [
                     {
-                        "longitude": -122.23,
-                        "latitude": 37.88,
-                        "housing_median_age": 41.0,
-                        "total_rooms": 880.0,
-                        "total_bedrooms": 129.0,
-                        "population": 322.0,
-                        "households": 126.0,
-                        "median_income": 8.3252,
-                        "ocean_proximity": "NEAR BAY",
+                        "schedtime": 930,
+                        "distance": 2475,
+                        "weather": 0,
+                        "dayweek": 3,
+                        "daymonth": 15,
+                        "flightnumber": 1234,
+                        "carrier": "AA",
+                        "origin": "JFK",
+                        "dest": "LAX",
                     }
                 ]
             }
         }
 
 
+class PredictionItem(BaseModel):
+    """
+    Return both predicted label and (if available) probability of delay.
+    - pred: 0/1
+    - label: "ontime"/"delayed"
+    - prob_delayed: optional float (P(y=1))
+    """
+    pred: int
+    label: str
+    prob_delayed: Optional[float] = None
+
+
 class PredictResponse(BaseModel):
-    predictions: List[float]
+    predictions: List[PredictionItem]
     count: int
 
     class Config:
         schema_extra = {
             "example": {
-                "predictions": [452600.0],
+                "predictions": [
+                    {"pred": 1, "label": "delayed", "prob_delayed": 0.73}
+                ],
                 "count": 1,
             }
         }
@@ -106,13 +126,15 @@ class PredictResponse(BaseModel):
 @app.get("/")
 def root():
     return {
-        "name": "Housing Price Prediction API",
+        "name": "Flight Delay Classification API",
         "version": "1.0.0",
         "endpoints": {
             "health": "/health",
             "predict": "/predict",
             "docs": "/docs",
         },
+        "model_path": str(MODEL_PATH),
+        "required_columns": REQUIRED_COLUMNS,
     }
 
 
@@ -133,6 +155,7 @@ def predict(request: PredictRequest):
             detail="No instances provided. Please provide at least one instance.",
         )
 
+    # 1) Convert to DataFrame
     try:
         X = pd.DataFrame(request.instances)
     except Exception as e:
@@ -141,24 +164,18 @@ def predict(request: PredictRequest):
             detail=f"Invalid input format. Could not convert to DataFrame: {e}",
         )
 
-    required_columns = [
-        "longitude",
-        "latitude",
-        "housing_median_age",
-        "total_rooms",
-        "total_bedrooms",
-        "population",
-        "households",
-        "median_income",
-        "ocean_proximity",
-    ]
-    missing = set(required_columns) - set(X.columns)
+    # 2) Validate columns
+    missing = set(REQUIRED_COLUMNS) - set(X.columns)
     if missing:
         raise HTTPException(
             status_code=400,
             detail=f"Missing required columns: {sorted(missing)}",
         )
 
+    # (可选) 只保留需要的列，避免用户多传字段导致顺序/类型混乱
+    X = X[REQUIRED_COLUMNS].copy()
+
+    # 3) Predict class
     try:
         preds = model.predict(X)
     except Exception as e:
@@ -167,17 +184,38 @@ def predict(request: PredictRequest):
             detail=f"Model prediction failed: {e}",
         )
 
-    preds_list = [float(p) for p in preds]
+    # 4) Predict probability if supported
+    prob_delayed: Optional[List[float]] = None
+    if hasattr(model, "predict_proba"):
+        try:
+            proba = model.predict_proba(X)
+            # proba shape: (n, 2) => [:, 1] is P(y=1)
+            prob_delayed = [float(p) for p in proba[:, 1]]
+        except Exception:
+            prob_delayed = None
 
-    return PredictResponse(predictions=preds_list, count=len(preds_list))
+    # 5) Build response items
+    items: List[PredictionItem] = []
+    for i, p in enumerate(preds):
+        p_int = int(p)
+        label = "delayed" if p_int == 1 else "ontime"
+        item = PredictionItem(
+            pred=p_int,
+            label=label,
+            prob_delayed=(prob_delayed[i] if prob_delayed is not None else None),
+        )
+        items.append(item)
+
+    return PredictResponse(predictions=items, count=len(items))
 
 
 @app.on_event("startup")
 async def startup_event():
     print("\n" + "=" * 80)
-    print("Housing Price Prediction API - Starting Up")
+    print("Flight Delay Classification API - Starting Up")
     print("=" * 80)
     print(f"Model path: {MODEL_PATH}")
     print(f"Model loaded: {model is not None}")
+    print(f"Required columns: {REQUIRED_COLUMNS}")
     print("API is ready to accept requests!")
     print("=" * 80 + "\n")
